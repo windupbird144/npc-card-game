@@ -84,7 +84,6 @@ function lose(state: State) : State {
 }
 
 function compare(one: Card, two: Card) : number {
-    if ([one.value,two.value].includes(14)) return 0
     if (one.value === two.value) return 0
     if (one.value < two.value) return -1
     if (one.value > two.value) return 1

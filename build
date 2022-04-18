@@ -1,0 +1,3 @@
+cat banner > script.user.js
+esbuild --bundle --minify gui.ts | tee -a script.user.js
+cat script.user.js | xclip -sel clip

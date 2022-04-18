@@ -1,0 +1,9 @@
+**/*.*
+!.gitignore
+!banner
+!build
+!game.ts
+!gui.ts
+!main.css
+!script.user.js
+!/images/scrape

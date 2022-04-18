@@ -1,0 +1,12 @@
+#!/bin/env sh
+declare -a faces=(spades clubs hearts diamonds)
+for i in $(seq 2 14)
+do
+    for j in "${faces[@]}"
+    do
+       url=$(printf "putsomethingheeeere/games/cards/%s_%s.gif" $i $j)
+       wget --random-wait --no-clobber $url
+    done
+done
+
+montage {2,3,4,5,6,7,8,9,10,11,12,13,14}*.gif -mode concatenate -geometry 70x90  montage.gif

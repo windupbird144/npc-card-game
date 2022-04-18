@@ -89,9 +89,8 @@ function Game() {
 
     function gameOver() {
         root.dataset.status = "lost"
-        const lastGuess = state.lastGuess === game.Move.Evavu ? "Evavu" : "Tyranu"
-        const correct = lastGuess === "Evavu" ? "Tyranu" : "Evavu"
-        summaryText.innerHTML = `You guessed ${lastGuess}. The correct answer was ${correct}.
+        let [last, correct] = state.lastGuess === game.Move.Evavu ? ["Evavu", "Tyranu"] : ["Tyranu", "Evavu"]
+        summaryText.innerHTML = `You guessed ${last}. The correct answer was ${correct}.
         You managed <b>${game.correctGuesses(state)}</b> correct guesses...
         That's worth <b>0 np</b>!`
         setImage(state.deck[0], imgClosed)
@@ -130,18 +129,17 @@ function Game() {
             "tyranu" : game.Move.Tyranu
         }[value]
         if (action == null) return
-        const newState = game.move(state, action)
-        if (newState.status === game.Status.Lost) {
+        setState(game.move(state, action))
+        if (state.status === game.Status.Lost) {
             gameOver()
         }
-        if (newState.status === game.Status.Won) {
+        if (state.status === game.Status.Won) {
             root.innerHTML = ""
             const a = document.createElement("a")
             a.textContent = "YOU WON!!! CLICK TO CLAIM YOUR PRIZE!!!"
             a.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             root.appendChild(a)
         }
-        setState(newState)
     })
 
     newGame()
